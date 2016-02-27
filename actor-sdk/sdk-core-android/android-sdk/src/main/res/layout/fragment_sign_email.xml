@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:lineSpacingMultiplier="1.1"
-            android:text="@string/auth_email_hint"
+            android:text="hint"
             android:textSize="16sp" />
 
 
@@ -43,7 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="12dp"
-                android:hint="@string/auth_email_edit_text_hint"
+                android:hint="email"
                 android:imeOptions="actionGo"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
@@ -60,19 +60,17 @@
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/shadow_square_1">
+            android:layout_marginTop="24dp">
 
             <TextView
                 android:id="@+id/button_continue_text"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
-                android:background="@drawable/btn_primary"
                 android:gravity="center"
                 android:minWidth="88dp"
                 android:paddingLeft="24dp"
                 android:paddingRight="24dp"
-                android:text="@string/auth_email_get_code"
+                android:text="get code"
                 android:textSize="15sp" />
         </FrameLayout>
 

@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/auth_code_phone_hint"
+            android:text="hint"
             android:textSize="16sp" />
 
         <EditText
@@ -37,7 +37,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="24dp"
             android:gravity="center"
-            android:hint="@string/auth_code_sms_hint"
+            android:hint="code"
             android:imeOptions="actionGo"
             android:inputType="number"
             android:textSize="18sp" />
@@ -50,19 +50,17 @@
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/shadow_square_1">
+            android:layout_marginTop="24dp">
 
             <TextView
                 android:id="@+id/button_confirm_sms_code_text"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
-                android:background="@drawable/btn_primary"
                 android:gravity="center"
                 android:minWidth="88dp"
                 android:paddingLeft="24dp"
                 android:paddingRight="24dp"
-                android:text="@string/auth_code_done"
+                android:text="done"
                 android:textSize="15sp" />
         </FrameLayout>
 
@@ -73,7 +71,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dp"
             android:background="@null"
-            android:text="@string/auth_code_wrong_number"
+            android:text="change email"
             android:textSize="14sp" />
 
     </LinearLayout>

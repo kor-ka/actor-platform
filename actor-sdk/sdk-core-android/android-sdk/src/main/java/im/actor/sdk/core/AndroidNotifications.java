@@ -28,11 +28,9 @@ import im.actor.core.entity.Notification;
 import im.actor.core.entity.Peer;
 import im.actor.core.entity.PeerType;
 import im.actor.core.viewmodel.FileVMCallback;
+import im.actor.molnia.MainActivity;
 import im.actor.sdk.R;
-import im.actor.sdk.controllers.Intents;
-import im.actor.sdk.controllers.activity.ActorMainActivity;
 import im.actor.sdk.util.Screen;
-import im.actor.sdk.view.avatar.AvatarPlaceholderDrawable;
 import im.actor.runtime.files.FileSystemReference;
 import im.actor.sdk.ActorSDK;
 
@@ -41,7 +39,7 @@ public class AndroidNotifications implements NotificationProvider {
     private static final int NOTIFICATION_ID = 1;
 
     private SoundPool soundPool;
-    private int soundId;
+//    private int soundId;
 
     private Peer visiblePeer;
 
@@ -51,7 +49,7 @@ public class AndroidNotifications implements NotificationProvider {
     public AndroidNotifications(Context context) {
         this.context = context;
         soundPool = new SoundPool(1, AudioManager.STREAM_NOTIFICATION, 0);
-        soundId = soundPool.load(context, R.raw.notification, 1);
+//        soundId = soundPool.load(context, R.raw.notification, 1);
     }
 
     private AndroidMessenger messenger() {
@@ -60,7 +58,7 @@ public class AndroidNotifications implements NotificationProvider {
 
     @Override
     public void onMessageArriveInApp(Messenger messenger) {
-        soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f);
+//        soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f);
     }
 
     @Override
@@ -126,9 +124,8 @@ public class AndroidNotifications implements NotificationProvider {
                     break;
             }
 
-            Drawable avatarDrawable = new AvatarPlaceholderDrawable(avatarTitle, id, 18, context);
 
-            result = buildSingleMessageNotification(avatarDrawable, builder, sender, text, topNotification);
+            result = buildSingleMessageNotification(builder, sender, text, topNotification);
 
             final NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             manager.notify(NOTIFICATION_ID, result);
@@ -147,7 +144,7 @@ public class AndroidNotifications implements NotificationProvider {
                     @Override
                     public void onDownloaded(FileSystemReference reference) {
                         RoundedBitmapDrawable d = getRoundedBitmapDrawable(reference);
-                        android.app.Notification result = buildSingleMessageNotification(d, builder, sender, text, topNotification);
+                        android.app.Notification result = buildSingleMessageNotification(builder, sender, text, topNotification);
                         //NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
                         manager.notify(NOTIFICATION_ID, result);
                     }
@@ -194,9 +191,8 @@ public class AndroidNotifications implements NotificationProvider {
                     break;
             }
 
-            Drawable avatarDrawable = new AvatarPlaceholderDrawable(avatarTitle, id, 18, context);
 
-            result = buildSingleConversationNotification(builder, inboxStyle, avatarDrawable, topNotification);
+            result = buildSingleConversationNotification(builder, inboxStyle, topNotification);
             final NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             manager.notify(NOTIFICATION_ID, result);
 
@@ -214,7 +210,7 @@ public class AndroidNotifications implements NotificationProvider {
                     @Override
                     public void onDownloaded(FileSystemReference reference) {
                         RoundedBitmapDrawable d = getRoundedBitmapDrawable(reference);
-                        android.app.Notification result = buildSingleConversationNotification(builder, inboxStyle, d, topNotification);
+                        android.app.Notification result = buildSingleConversationNotification(builder, inboxStyle, topNotification);
                         manager.notify(NOTIFICATION_ID, result);
                     }
                 });
@@ -225,11 +221,11 @@ public class AndroidNotifications implements NotificationProvider {
 
         } else {
             // Multiple conversations notification
-            builder.setContentTitle(ActorSDK.sharedActor().getAppName());
+            builder.setContentTitle("Molnia");
             builder.setContentText(messagesCount + context.getString(R.string.notification_multiple_canversations_after_msg_count) + conversationsCount + context.getString(R.string.notifications_multiple_canversations_after_coversations_count));
             visiblePeer = null;
 
-            intent = new Intent(context, ActorMainActivity.class);
+            intent = new Intent(context, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             builder.setContentIntent(PendingIntent.getActivity(context, 0,
                     intent,
@@ -273,24 +269,24 @@ public class AndroidNotifications implements NotificationProvider {
         return d;
     }
 
-    private android.app.Notification buildSingleConversationNotification(NotificationCompat.Builder builder, NotificationCompat.InboxStyle inboxStyle, Drawable avatarDrawable, Notification topNotification) {
+    private android.app.Notification buildSingleConversationNotification(NotificationCompat.Builder builder, NotificationCompat.InboxStyle inboxStyle, Notification topNotification) {
 
         return builder
-                .setLargeIcon(drawableToBitmap(avatarDrawable))
                 .setContentIntent(PendingIntent.getActivity(context, 0,
-                        Intents.openDialog(topNotification.getPeer(), false, context),
+                        new Intent(context, MainActivity.class),
+//                        Intents.openDialog(topNotification.getPeer(), false, context),
                         PendingIntent.FLAG_UPDATE_CURRENT))
                 .setStyle(inboxStyle)
                 .build();
     }
 
-    private android.app.Notification buildSingleMessageNotification(Drawable d, NotificationCompat.Builder builder, String sender, CharSequence text, Notification topNotification) {
+    private android.app.Notification buildSingleMessageNotification(NotificationCompat.Builder builder, String sender, CharSequence text, Notification topNotification) {
         return builder
                 .setContentTitle(sender)
                 .setContentText(text)
-                .setLargeIcon(drawableToBitmap(d))
                 .setContentIntent(PendingIntent.getActivity(context, 0,
-                        Intents.openDialog(topNotification.getPeer(), false, context),
+                        new Intent(context, MainActivity.class),
+//                        Intents.openDialog(topNotification.getPeer(), false, context),
                         PendingIntent.FLAG_CANCEL_CURRENT))
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(text))
                 .build();

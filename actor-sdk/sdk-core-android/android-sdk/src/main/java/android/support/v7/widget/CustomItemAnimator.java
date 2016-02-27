@@ -25,7 +25,6 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
-import im.actor.sdk.controllers.fragment.AnimatorViewHolder;
 
 /**
  * This implementation of {@link RecyclerView.ItemAnimator} provides basic

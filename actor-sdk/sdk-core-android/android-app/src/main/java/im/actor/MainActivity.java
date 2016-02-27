@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import im.actor.core.AuthState;
 import im.actor.sdk.ActorSDK;
-import im.actor.tour.TourActivity;
 
 import static im.actor.sdk.util.ActorSDKMessenger.messenger;
 
@@ -15,12 +14,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (messenger().getAuthState() != AuthState.LOGGED_IN) {
-            startActivity(new Intent(this, TourActivity.class));
-            finish();
-            return;
-        }
 
         ActorSDK.sharedActor().startMessagingApp(this);
         finish();
