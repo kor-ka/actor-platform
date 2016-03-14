@@ -1,8 +1,14 @@
 package im.actor.sdk.core.controllers.dialogs;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +28,7 @@ import im.actor.sdk.R;
 import im.actor.sdk.core.controllers.DisplayListFragment;
 import im.actor.sdk.core.controllers.adapters.OnItemClickedListener;
 import im.actor.sdk.util.Screen;
+import im.actor.sdk.view.BaseUrlSpan;
 
 import static im.actor.sdk.util.ActorSDKMessenger.messenger;
 
@@ -49,18 +56,25 @@ public abstract class BaseDialogFragment extends DisplayListFragment<Dialog, Dia
         // Footer
 
         FrameLayout footer = new FrameLayout(getActivity());
-        footer.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Screen.dp(160)));
-        ImageView shadow = new ImageView(getActivity());
-        shadow.setScaleType(ImageView.ScaleType.FIT_XY);
-        shadow.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Screen.dp(4)));
-        footer.addView(shadow);
+        footer.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Screen.dp(100)));
 
         TextView hint = new TextView(getActivity());
-        hint.setText(R.string.dialogs_hint);
+        SpannableString spannableString = new SpannableString(getString(R.string.dialogs_hint));
+        spannableString.setSpan(new ForegroundColorSpan(Color.RED), 11, 12, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new BaseUrlSpan("http://actor.im", false), 24, 29, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        hint.setText(spannableString);
+        hint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent viewIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://actor.im"));
+                startActivity(viewIntent);
+            }
+        });
+
         hint.setPadding(Screen.dp(16), Screen.dp(8), Screen.dp(16), 0);
         hint.setGravity(Gravity.CENTER);
         hint.setTextSize(15);
-        hint.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        hint.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         footer.addView(hint);
 
         addFooterView(footer);
