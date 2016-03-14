@@ -88,7 +88,7 @@
     <!-- Sign In Fragment -->
     <string name="auth_code_phone_hint">We\'ve sent an SMS with activation code to your phone {0}</string>
     <string name="auth_code_email_hint">We\'ve sent an email with activation code to {0}</string>
-    <string name="auth_code_title">Enter SMS code</string>
+    <string name="auth_code_title">Enter code</string>
     <string name="auth_code_sms_hint">Sms code</string>
     <string name="auth_code_done">DONE</string>
     <string name="auth_code_wrong_number">WRONG PHONE NUMBER?</string>
