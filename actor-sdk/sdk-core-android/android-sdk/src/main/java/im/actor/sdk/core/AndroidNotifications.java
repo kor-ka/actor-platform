@@ -67,7 +67,7 @@ public class AndroidNotifications implements NotificationProvider {
         final NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
 
         builder.setAutoCancel(true);
-        builder.setSmallIcon(R.drawable.ic_app_notify);
+//        builder.setSmallIcon(R.drawable.ic_app_notify);
         builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
         builder.setCategory(NotificationCompat.CATEGORY_MESSAGE);
 

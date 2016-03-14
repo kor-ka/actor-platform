@@ -15,3 +15,8 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+-dontwarn okio.**
+
+-keep public class * extends android.support.v7.widget.RecyclerView.ItemDecoration
+-keep class android.support.v7.widget.RecyclerView

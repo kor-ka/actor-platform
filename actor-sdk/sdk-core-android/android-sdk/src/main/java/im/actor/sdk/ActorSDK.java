@@ -14,6 +14,7 @@ import im.actor.core.ApiConfiguration;
 import im.actor.core.ConfigurationBuilder;
 import im.actor.core.DeviceCategory;
 import im.actor.core.PlatformType;
+import im.actor.core.providers.PhoneBookProvider;
 import im.actor.molnia.MainActivity;
 import im.actor.runtime.Log;
 import im.actor.runtime.webrtc.WebRTCIceServer;
@@ -149,6 +150,15 @@ public class ActorSDK {
         return messenger;
     }
 
+    /**
+     * Getting Push Registration Id
+     *
+     * @return pushId
+     */
+    public long getPushId() {
+        return pushId;
+    }
+
     //
     // SDK Initialization
     //
@@ -177,6 +187,12 @@ public class ActorSDK {
         for (String t : trustedKeys) {
             builder.addTrustedKey(t);
         }
+        builder.setPhoneBookProvider(new PhoneBookProvider() {
+            @Override
+            public void loadPhoneBook(Callback callback) {
+
+            }
+        });
         builder.setNotificationProvider(new AndroidNotifications(AndroidContext.getContext()));
         builder.setDeviceCategory(DeviceCategory.MOBILE);
         builder.setPlatformType(PlatformType.ANDROID);

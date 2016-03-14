@@ -73,6 +73,12 @@
 
         </activity>
 
+        <activity
+            android:name=".core.controllers.auth.AuthActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="adjustResize" />
+
+
         <service
             android:name="im.actor.sdk.services.KeepAliveService"
             android:enabled="true"
