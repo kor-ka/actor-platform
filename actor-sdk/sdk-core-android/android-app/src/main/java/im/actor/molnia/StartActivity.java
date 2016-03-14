@@ -1,15 +1,12 @@
-package im.actor;
+package im.actor.molnia;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import im.actor.core.AuthState;
 import im.actor.sdk.ActorSDK;
 
-import static im.actor.sdk.util.ActorSDKMessenger.messenger;
 
-public class MainActivity extends AppCompatActivity {
+public class StartActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

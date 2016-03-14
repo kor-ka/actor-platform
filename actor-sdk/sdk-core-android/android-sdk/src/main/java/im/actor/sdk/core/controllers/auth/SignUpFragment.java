@@ -15,7 +15,6 @@ import android.widget.TextView;
 import im.actor.core.entity.Sex;
 import im.actor.sdk.ActorSDK;
 import im.actor.sdk.R;
-import im.actor.sdk.util.Fonts;
 import im.actor.sdk.util.KeyboardHelper;
 import im.actor.sdk.util.Screen;
 
@@ -34,7 +33,6 @@ public class SignUpFragment extends BaseAuthFragment {
         keyboardHelper = new KeyboardHelper(getActivity());
 
         TextView buttonConfirm = (TextView) v.findViewById(R.id.button_confirm_sms_code_text);
-        buttonConfirm.setTypeface(Fonts.medium());
 
         firstNameEditText = (EditText) v.findViewById(R.id.et_first_name_enter);
         final View sendConfirmCodeButton = v.findViewById(R.id.button_confirm_sms_code);

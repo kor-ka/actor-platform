@@ -18,7 +18,6 @@ import android.widget.TextView;
 import im.actor.core.AuthState;
 import im.actor.sdk.ActorSDK;
 import im.actor.sdk.R;
-import im.actor.sdk.util.Fonts;
 import im.actor.sdk.util.KeyboardHelper;
 
 import static im.actor.sdk.util.ActorSDKMessenger.messenger;

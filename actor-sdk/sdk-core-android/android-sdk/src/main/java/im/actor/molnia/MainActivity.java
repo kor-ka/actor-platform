@@ -1,6 +1,5 @@
 package im.actor.molnia;
 
-import android.view.View;
 
 import im.actor.runtime.mvvm.Value;
 import im.actor.runtime.mvvm.ValueDoubleChangedListener;

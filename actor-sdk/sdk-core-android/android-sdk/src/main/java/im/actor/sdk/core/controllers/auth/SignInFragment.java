@@ -18,7 +18,6 @@ import android.widget.TextView;
 
 import im.actor.sdk.ActorSDK;
 import im.actor.sdk.R;
-import im.actor.sdk.util.Fonts;
 import im.actor.sdk.util.KeyboardHelper;
 
 import static im.actor.sdk.util.ActorSDKMessenger.messenger;
@@ -38,8 +37,6 @@ public class SignInFragment extends BaseAuthFragment {
         keyboardHelper = new KeyboardHelper(getActivity());
         View v = inflater.inflate(R.layout.fragment_sign_in, container, false);
         TextView buttonConfirm = (TextView) v.findViewById(R.id.button_confirm_sms_code_text);
-        buttonConfirm.setTypeface(Fonts.medium());
-        ((TextView) v.findViewById(R.id.button_edit_phone)).setTypeface(Fonts.medium());
 
         TextView sendHint = (TextView) v.findViewById(R.id.sendHint);
         String email = messenger().getAuthEmail();

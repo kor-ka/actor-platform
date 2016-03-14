@@ -15,6 +15,7 @@ import im.actor.core.network.RpcTimeoutException;
 import im.actor.core.viewmodel.Command;
 import im.actor.core.viewmodel.CommandCallback;
 import im.actor.molnia.MainActivity;
+import im.actor.runtime.Log;
 import im.actor.sdk.ActorSDK;
 import im.actor.sdk.R;
 import im.actor.sdk.core.controllers.BaseFragmentActivity;
@@ -46,6 +47,7 @@ public class AuthActivity extends BaseFragmentActivity {
         if (savedInstanceState == null) {
             updateState();
         }
+        Log.d("TIMING", "AUTH ACTIVITY ONCREATE");
     }
 
     @Override
@@ -97,6 +99,7 @@ public class AuthActivity extends BaseFragmentActivity {
                 break;
 
             case CODE_VALIDATION_CUSTOM:
+            case CODE_VALIDATION_EMAIL:
             case CODE_VALIDATION_PHONE:
 
                 Fragment signInFragment = new SignInFragment();
@@ -131,6 +134,7 @@ public class AuthActivity extends BaseFragmentActivity {
             @Override
             public void onResult(final AuthState res) {
                 if(dismissProgress()){
+                    Log.d("AUTH", res.name());
                     updateState(res);
                 }
             }

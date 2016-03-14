@@ -1,4 +1,4 @@
-package im.actor;
+package im.actor.molnia;
 
 import im.actor.runtime.Log;
 import im.actor.sdk.ActorSDKApplication;
