@@ -49,6 +49,7 @@ import im.actor.runtime.json.JSONObject;
 public abstract class AbsContent {
 
     private static ContentConverter[] converters = new ContentConverter[0];
+    private int updatedHash;
 
     public static void registerConverter(ContentConverter contentConverter) {
         ContentConverter[] nConverters = new ContentConverter[converters.length + 1];
@@ -208,5 +209,14 @@ public abstract class AbsContent {
 
     public static ContentConverter[] getConverters() {
         return converters;
+    }
+
+    public int getUpdatedHash() {
+        return updatedHash;
+    }
+
+
+    public void setUpdatedHash(int updatedHash) {
+        this.updatedHash = updatedHash;
     }
 }

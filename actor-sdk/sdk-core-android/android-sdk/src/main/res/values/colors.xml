@@ -2,4 +2,13 @@
 <resources>
     <color name="selector_selected">#66999999</color>
     <color name="selector_hover">#33999999</color>
+
+    <color name="placeholder_empty">#ffb8b8b8</color>
+    <color name="placeholder_0">#59a2be</color>
+    <color name="placeholder_1">#2093cd</color>
+    <color name="placeholder_2">#ad62a7</color>
+    <color name="placeholder_3">#f16364</color>
+    <color name="placeholder_4">#f9a43e</color>
+    <color name="placeholder_5">#e4c62e</color>
+    <color name="placeholder_6">#67bf74</color>
 </resources>

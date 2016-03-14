@@ -17,7 +17,6 @@ import static im.actor.sdk.util.ActorSDKMessenger.messenger;
 public class DialogsFragment extends BaseDialogFragment {
 
     protected void onItemClick(Dialog item) {
-        Toast.makeText(getContext(), "chat", Toast.LENGTH_LONG).show();
         ((MainActivity) getActivity()).onDialogClicked(item);
     }
 

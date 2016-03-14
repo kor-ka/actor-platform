@@ -4,7 +4,10 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +31,7 @@ import static im.actor.sdk.util.ActorSDKMessenger.myUid;
 public class DialogHolder extends BindedViewHolder {
 
     private final Context context;
+    private final int[] colors;
     private TextView title;
     private TextView text;
     private TextView time;
@@ -53,6 +57,16 @@ public class DialogHolder extends BindedViewHolder {
 
         final int paddingH = Screen.dp(11);
         final int paddingV = Screen.dp(9);
+
+        colors = new int[]{
+                context.getResources().getColor(R.color.placeholder_0),
+                context.getResources().getColor(R.color.placeholder_1),
+                context.getResources().getColor(R.color.placeholder_2),
+                context.getResources().getColor(R.color.placeholder_3),
+                context.getResources().getColor(R.color.placeholder_4),
+                context.getResources().getColor(R.color.placeholder_5),
+                context.getResources().getColor(R.color.placeholder_6),
+        };
 
         fl.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Screen.dp(73)));
         fl.setBackgroundColor(Color.WHITE);
@@ -174,7 +188,11 @@ public class DialogHolder extends BindedViewHolder {
             counter.setVisibility(View.GONE);
         }
 
-        title.setText((data.getPeer().getPeerType() == PeerType.GROUP ? "[GROUP]" : "") + data.getDialogTitle());
+        SpannableStringBuilder builder = new SpannableStringBuilder();
+        boolean isGroup = data.getPeer().getPeerType() == PeerType.GROUP;
+        builder.append((isGroup ? "[GROUP]" : "") + data.getDialogTitle());
+        builder.setSpan(new ForegroundColorSpan(colors[Math.abs(data.getSenderId()) % colors.length]), isGroup ? 7 : 0, isGroup ? 8 : 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        title.setText(builder);
 
 
         if (data.getDate() > 0) {
@@ -213,7 +231,7 @@ public class DialogHolder extends BindedViewHolder {
                 }
             };
             messenger().getTyping(bindedUid).subscribe(privateTypingListener);
-        } else if (data.getPeer().getPeerType() == PeerType.GROUP) {
+        } else if (isGroup) {
             bindedGid = data.getPeer().getPeerId();
             groupTypingListener = new ValueChangedListener<int[]>() {
                 @Override

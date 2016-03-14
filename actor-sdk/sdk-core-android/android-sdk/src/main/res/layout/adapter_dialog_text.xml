@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (C) 2015 Actor LLC. <https://actor.im>
+  -->
+
+<im.actor.sdk.view.BubbleContainer xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true">
+
+    <im.actor.sdk.view.BubbleTextContainer
+        android:paddingRight="4dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/fl_bubble"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:duplicateParentState="true">
+
+        <TextView
+            android:id="@+id/tv_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|left"
+            android:includeFontPadding="false"
+            android:textSize="15sp" />
+
+
+    </im.actor.sdk.view.BubbleTextContainer>
+</im.actor.sdk.view.BubbleContainer>
