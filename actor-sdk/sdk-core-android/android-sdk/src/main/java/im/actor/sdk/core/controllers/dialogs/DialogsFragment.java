@@ -2,6 +2,7 @@ package im.actor.sdk.core.controllers.dialogs;
 
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
+import android.widget.Toast;
 
 import im.actor.core.entity.Dialog;
 import im.actor.core.entity.PeerType;
@@ -16,6 +17,7 @@ import static im.actor.sdk.util.ActorSDKMessenger.messenger;
 public class DialogsFragment extends BaseDialogFragment {
 
     protected void onItemClick(Dialog item) {
+        Toast.makeText(getContext(), "chat", Toast.LENGTH_LONG).show();
         ((MainActivity) getActivity()).onDialogClicked(item);
     }
 
