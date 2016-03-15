@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import im.actor.core.entity.Dialog;
+import im.actor.core.entity.Peer;
 import im.actor.runtime.mvvm.Value;
 import im.actor.runtime.mvvm.ValueDoubleChangedListener;
 import im.actor.sdk.core.controllers.BaseFragmentActivity;
@@ -52,11 +53,22 @@ public class MainActivity extends BaseFragmentActivity {
     public static final String EXTRA_CHAT_COMPOSE = "compose";
 
     public void onDialogClicked(Dialog item) {
+        openDialog(item.getPeer());
+    }
+
+    private void openDialog(Peer peer) {
         final Intent intent = new Intent(this, ChatActivity.class);
-        intent.putExtra(EXTRA_CHAT_PEER, item.getPeer().getUnuqueId());
+        intent.putExtra(EXTRA_CHAT_PEER, peer.getUnuqueId());
         intent.putExtra(EXTRA_CHAT_COMPOSE, true);
-        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        long longPeer = intent.getLongExtra(EXTRA_CHAT_PEER, -1);
+        if (longPeer != -1) {
+            openDialog(Peer.fromUniqueId(longPeer));
+        }
+    }
 }

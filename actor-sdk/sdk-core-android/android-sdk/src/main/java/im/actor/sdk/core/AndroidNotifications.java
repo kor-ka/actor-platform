@@ -10,6 +10,7 @@ import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.SoundPool;
+import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
@@ -67,7 +68,7 @@ public class AndroidNotifications implements NotificationProvider {
         final NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
 
         builder.setAutoCancel(true);
-//        builder.setSmallIcon(R.drawable.ic_app_notify);
+        builder.setSmallIcon(R.drawable.ic_stat_molnia);
         builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
         builder.setCategory(NotificationCompat.CATEGORY_MESSAGE);
 
@@ -107,51 +108,10 @@ public class AndroidNotifications implements NotificationProvider {
             final CharSequence text = messenger.getFormatter().formatNotificationText(topNotification);
             visiblePeer = topNotification.getPeer();
 
-            Avatar avatar = null;
-            int id = 0;
-            String avatarTitle = "";
-            switch (visiblePeer.getPeerType()) {
-                case PRIVATE:
-                    avatar = messenger().getUsers().get(visiblePeer.getPeerId()).getAvatar().get();
-                    id = messenger().getUsers().get(visiblePeer.getPeerId()).getId();
-                    avatarTitle = messenger().getUsers().get(visiblePeer.getPeerId()).getName().get();
-                    break;
-
-                case GROUP:
-                    avatar = messenger().getGroups().get(visiblePeer.getPeerId()).getAvatar().get();
-                    id = messenger().getGroups().get(visiblePeer.getPeerId()).getId();
-                    avatarTitle = messenger().getGroups().get(visiblePeer.getPeerId()).getName().get();
-                    break;
-            }
-
-
             result = buildSingleMessageNotification(builder, sender, text, topNotification);
 
             final NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             manager.notify(NOTIFICATION_ID, result);
-
-            if (avatar != null && avatar.getSmallImage() != null && avatar.getSmallImage().getFileReference() != null) {
-                messenger.bindFile(avatar.getSmallImage().getFileReference(), true, new FileVMCallback() {
-
-                    @Override
-                    public void onNotDownloaded() {
-                    }
-
-                    @Override
-                    public void onDownloading(float progress) {
-                    }
-
-                    @Override
-                    public void onDownloaded(FileSystemReference reference) {
-                        RoundedBitmapDrawable d = getRoundedBitmapDrawable(reference);
-                        android.app.Notification result = buildSingleMessageNotification(builder, sender, text, topNotification);
-                        //NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-                        manager.notify(NOTIFICATION_ID, result);
-                    }
-                });
-            } else {
-                manager.notify(NOTIFICATION_ID, result);
-            }
 
 
         } else if (conversationsCount == 1) {
@@ -174,49 +134,13 @@ public class AndroidNotifications implements NotificationProvider {
                 }
             }
             inboxStyle.setSummaryText(messagesCount + context.getString(R.string.notifications_single_conversation_аfter_messages_count));
-            Avatar avatar = null;
-            int id = 0;
-            String avatarTitle = "";
-            switch (visiblePeer.getPeerType()) {
-                case PRIVATE:
-                    avatar = messenger().getUsers().get(visiblePeer.getPeerId()).getAvatar().get();
-                    id = messenger().getUsers().get(visiblePeer.getPeerId()).getId();
-                    avatarTitle = messenger().getUsers().get(visiblePeer.getPeerId()).getName().get();
-                    break;
 
-                case GROUP:
-                    avatar = messenger().getGroups().get(visiblePeer.getPeerId()).getAvatar().get();
-                    id = messenger().getGroups().get(visiblePeer.getPeerId()).getId();
-                    avatarTitle = messenger().getGroups().get(visiblePeer.getPeerId()).getName().get();
-                    break;
-            }
 
 
             result = buildSingleConversationNotification(builder, inboxStyle, topNotification);
             final NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             manager.notify(NOTIFICATION_ID, result);
 
-            if (avatar != null && avatar.getSmallImage() != null && avatar.getSmallImage().getFileReference() != null) {
-                messenger.bindFile(avatar.getSmallImage().getFileReference(), true, new FileVMCallback() {
-
-                    @Override
-                    public void onNotDownloaded() {
-                    }
-
-                    @Override
-                    public void onDownloading(float progress) {
-                    }
-
-                    @Override
-                    public void onDownloaded(FileSystemReference reference) {
-                        RoundedBitmapDrawable d = getRoundedBitmapDrawable(reference);
-                        android.app.Notification result = buildSingleConversationNotification(builder, inboxStyle, topNotification);
-                        manager.notify(NOTIFICATION_ID, result);
-                    }
-                });
-            } else {
-                manager.notify(NOTIFICATION_ID, result);
-            }
 
 
         } else {
@@ -225,8 +149,7 @@ public class AndroidNotifications implements NotificationProvider {
             builder.setContentText(messagesCount + context.getString(R.string.notification_multiple_canversations_after_msg_count) + conversationsCount + context.getString(R.string.notifications_multiple_canversations_after_coversations_count));
             visiblePeer = null;
 
-            intent = new Intent(context, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent = getIntent(null);
             builder.setContentIntent(PendingIntent.getActivity(context, 0,
                     intent,
                     PendingIntent.FLAG_UPDATE_CURRENT));
@@ -273,11 +196,20 @@ public class AndroidNotifications implements NotificationProvider {
 
         return builder
                 .setContentIntent(PendingIntent.getActivity(context, 0,
-                        new Intent(context, MainActivity.class),
-//                        Intents.openDialog(topNotification.getPeer(), false, context),
+                        getIntent(topNotification.getPeer()),
+//                        Intents.openDialog(C, false, context),
                         PendingIntent.FLAG_UPDATE_CURRENT))
                 .setStyle(inboxStyle)
                 .build();
+    }
+
+    @NonNull
+    private Intent getIntent(Peer peer) {
+        Intent intent = new Intent(context, MainActivity.class);
+        if (peer != null) {
+            intent.putExtra(MainActivity.EXTRA_CHAT_PEER, peer.getUnuqueId());
+        }
+        return intent;
     }
 
     private android.app.Notification buildSingleMessageNotification(NotificationCompat.Builder builder, String sender, CharSequence text, Notification topNotification) {
@@ -285,7 +217,7 @@ public class AndroidNotifications implements NotificationProvider {
                 .setContentTitle(sender)
                 .setContentText(text)
                 .setContentIntent(PendingIntent.getActivity(context, 0,
-                        new Intent(context, MainActivity.class),
+                        getIntent(topNotification.getPeer()),
 //                        Intents.openDialog(topNotification.getPeer(), false, context),
                         PendingIntent.FLAG_CANCEL_CURRENT))
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(text))

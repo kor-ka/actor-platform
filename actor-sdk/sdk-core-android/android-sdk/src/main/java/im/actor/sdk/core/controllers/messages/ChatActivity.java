@@ -1,5 +1,6 @@
 package im.actor.sdk.core.controllers.messages;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -24,6 +25,7 @@ public class ChatActivity extends BaseActivity {
     public static final String EXTRA_CHAT_PEER = "chat_peer";
     private Peer peer;
     private EditText messageEditText;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,33 +37,9 @@ public class ChatActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
 
-        peer = Peer.fromUniqueId(getIntent().getExtras().getLong(EXTRA_CHAT_PEER));
-
-
-        if (peer.getPeerType() == PeerType.PRIVATE) {
-
-            // Loading user
-            final UserVM user = users().get(peer.getPeerId());
-            if (user == null) {
-                finish();
-                return;
-            }
-            getSupportActionBar().setTitle(user.getName().get());
-        } else if (peer.getPeerType() == PeerType.GROUP) {
-            // Loading group
-            GroupVM group = groups().get(peer.getPeerId());
-            if (group == null) {
-                finish();
-                return;
-            }
-
-            getSupportActionBar().setTitle(group.getName().get());
-
-        }
-
-
+        intent = getIntent();
+        handleIntenet(savedInstanceState);
         // Setting fragment
-        setFragment(savedInstanceState);
 
         messageEditText = (EditText) findViewById(R.id.et);
 
@@ -101,6 +79,47 @@ public class ChatActivity extends BaseActivity {
             }
         });
 
+    }
+
+    private void handleIntenet(Bundle savedInstanceState) {
+        peer = Peer.fromUniqueId(intent.getExtras().getLong(EXTRA_CHAT_PEER));
+
+
+        if (peer.getPeerType() == PeerType.PRIVATE) {
+
+            // Loading user
+            final UserVM user = users().get(peer.getPeerId());
+            if (user == null) {
+                finish();
+            }
+            getSupportActionBar().setTitle(user.getName().get());
+        } else if (peer.getPeerType() == PeerType.GROUP) {
+            // Loading group
+            GroupVM group = groups().get(peer.getPeerId());
+            if (group == null) {
+                finish();
+            }
+
+            getSupportActionBar().setTitle(group.getName().get());
+
+        }
+
+        setFragment(savedInstanceState);
+
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        //Notify old chat closed
+        messenger().onConversationClosed(peer);
+
+        peer = Peer.fromUniqueId(intent.getExtras().getLong(EXTRA_CHAT_PEER));
+
+
+        onPerformBind();
+        this.intent = intent;
+        handleIntenet(null);
     }
 
 
