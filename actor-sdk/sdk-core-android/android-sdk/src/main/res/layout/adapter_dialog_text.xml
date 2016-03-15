@@ -8,8 +8,7 @@
     android:layout_height="wrap_content"
     android:clickable="true">
 
-    <im.actor.sdk.view.BubbleTextContainer
-        android:paddingRight="4dp"
+    <FrameLayout
         android:layout_marginTop="10dp"
         android:id="@+id/fl_bubble"
         android:layout_width="wrap_content"
@@ -18,12 +17,14 @@
 
         <TextView
             android:id="@+id/tv_text"
+            android:paddingLeft="11dp"
+            android:paddingRight="11dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top|left"
-            android:includeFontPadding="false"
+            android:includeFontPadding="true"
             android:textSize="15sp" />
 
 
-    </im.actor.sdk.view.BubbleTextContainer>
+    </FrameLayout>
 </im.actor.sdk.view.BubbleContainer>
