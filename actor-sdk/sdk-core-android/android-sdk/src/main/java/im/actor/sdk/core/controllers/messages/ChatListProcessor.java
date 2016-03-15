@@ -31,6 +31,7 @@ import im.actor.core.entity.content.TextContent;
 import im.actor.core.entity.content.VideoContent;
 import im.actor.core.viewmodel.GroupVM;
 import im.actor.core.viewmodel.UserVM;
+import im.actor.runtime.android.AndroidContext;
 import im.actor.runtime.generic.mvvm.ListProcessor;
 import im.actor.sdk.ActorSDK;
 import im.actor.sdk.R;
@@ -47,7 +48,6 @@ public class ChatListProcessor implements ListProcessor<Message> {
     private HashMap<Long, PreprocessedTextData> preprocessedTexts = new HashMap<Long, PreprocessedTextData>();
     private HashSet<Integer> updatedTexts = new HashSet<Integer>();
 
-    private MessagesFragment fragment;
     private boolean isGroup;
     private int[] colors;
 
@@ -58,7 +58,6 @@ public class ChatListProcessor implements ListProcessor<Message> {
     private GroupVM group;
 
     public ChatListProcessor(MessagesFragment fragment) {
-        this.fragment = fragment;
 
         isGroup = fragment.getPeer().getPeerType() == PeerType.GROUP;
         if (isGroup) {
@@ -157,7 +156,7 @@ public class ChatListProcessor implements ListProcessor<Message> {
                         builder.setSpan(new RelativeSizeSpan(1.2f), 0, 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
                         builder.setSpan(new ForegroundColorSpan(colors[Math.abs(msg.getSenderId()) % colors.length]), 0, 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
                         builder.append(time);
-                        builder.setSpan(new ForegroundColorSpan(fragment.getResources().getColor(R.color.placeholder_empty)), name.length(), name.length() + time.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+                        builder.setSpan(new ForegroundColorSpan(AndroidContext.getContext().getResources().getColor(R.color.placeholder_empty)), name.length(), name.length() + time.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
                         builder.setSpan(new RelativeSizeSpan(0.8f), name.length(), name.length() + time.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
                         builder.append("\n");
                         spannableString = builder.append(spannableString);
@@ -165,7 +164,7 @@ public class ChatListProcessor implements ListProcessor<Message> {
                     }
 
                     if (msg.getSenderId() == myUid()) {
-                        spannableString.setSpan(new ForegroundColorSpan(fragment.getResources().getColor(R.color.placeholder_empty)), 0, spannableString.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+                        spannableString.setSpan(new ForegroundColorSpan(AndroidContext.getContext().getResources().getColor(R.color.placeholder_empty)), 0, spannableString.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
                         hasSpannable = true;
                     }
 
