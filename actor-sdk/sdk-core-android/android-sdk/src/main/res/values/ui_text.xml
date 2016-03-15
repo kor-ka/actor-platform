@@ -170,7 +170,7 @@
 
     <!-- Dialogs -->
     <string name="dialogs_title">Chats</string>
-    <string name="dialogs_hint">Build with \u2764 powered by Actor</string>
+    <string name="dialogs_hint">Made with \u2764 powered by Actor</string>
     <string name="dialogs_empty_title">Start messaging</string>
     <string name="dialogs_empty">Pick a contact from your contacts list or press plus button to start the conversation right now.</string>
 
