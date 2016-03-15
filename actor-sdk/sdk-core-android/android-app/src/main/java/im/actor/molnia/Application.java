@@ -9,7 +9,7 @@ public class Application extends ActorSDKApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.d("TIMING", "ONCREATE APP");
+
     }
 
     @Override

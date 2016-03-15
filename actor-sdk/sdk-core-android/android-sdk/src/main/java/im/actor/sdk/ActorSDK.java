@@ -24,6 +24,7 @@ import im.actor.sdk.core.AndroidNotifications;
 import im.actor.sdk.core.controllers.auth.AuthActivity;
 import im.actor.sdk.push.ActorPushRegister;
 import im.actor.sdk.util.Devices;
+import push.PushManager;
 
 
 public class ActorSDK {
@@ -79,7 +80,7 @@ public class ActorSDK {
     /**
      * Push Registration Id
      */
-    private long pushId = 0;
+    private long pushId = 209133700967L;
     /**
      * Actor Push Endpoint
      */
@@ -247,7 +248,7 @@ public class ActorSDK {
 
         try {
             if (pushId != 0) {
-                final ActorPushManager pushManager = (ActorPushManager) Class.forName("im.actor.push.PushManager").newInstance();
+                final ActorPushManager pushManager = new PushManager();
                 pushManager.registerPush(application);
             }
         } catch (Exception e) {

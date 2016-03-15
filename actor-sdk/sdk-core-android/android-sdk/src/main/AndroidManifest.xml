@@ -16,8 +16,7 @@
         <activity
             android:name="im.actor.molnia.MainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="adjustResize"
-            android:launchMode="singleInstance">
+            android:windowSoftInputMode="adjustResize">
 
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -68,8 +67,7 @@
         <activity
             android:name="im.actor.sdk.core.controllers.messages.ChatActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="adjustResize"
-            android:launchMode="singleInstance" />
+            android:windowSoftInputMode="adjustResize" />
 
 
         <service

@@ -42,6 +42,11 @@ public class MainActivity extends BaseFragmentActivity {
         if (savedInstanceState == null) {
             showFragment(new DialogsFragment(), false, false);
         }
+
+        long longPeer = getIntent().getLongExtra(EXTRA_CHAT_PEER, -1);
+        if (longPeer != -1) {
+            openDialog(Peer.fromUniqueId(longPeer));
+        }
     }
 
     @Override
@@ -83,15 +88,6 @@ public class MainActivity extends BaseFragmentActivity {
         intent.putExtra(EXTRA_CHAT_PEER, peer.getUnuqueId());
         intent.putExtra(EXTRA_CHAT_COMPOSE, true);
         startActivity(intent);
-    }
-
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        long longPeer = intent.getLongExtra(EXTRA_CHAT_PEER, -1);
-        if (longPeer != -1) {
-            openDialog(Peer.fromUniqueId(longPeer));
-        }
     }
 
     @Override

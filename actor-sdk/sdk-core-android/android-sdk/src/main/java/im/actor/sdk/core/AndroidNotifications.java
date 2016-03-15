@@ -209,6 +209,7 @@ public class AndroidNotifications implements NotificationProvider {
         if (peer != null) {
             intent.putExtra(MainActivity.EXTRA_CHAT_PEER, peer.getUnuqueId());
         }
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         return intent;
     }
 

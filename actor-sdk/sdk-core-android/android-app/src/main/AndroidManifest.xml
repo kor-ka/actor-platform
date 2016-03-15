@@ -2,6 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="im.actor.molnia">
 
+    <permission
+        android:name="im.actor.molnia.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="im.actor.molnia.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
     <application
         android:name="im.actor.molnia.Application"
         android:allowBackup="true"
@@ -20,9 +27,16 @@
         </activity>
 
 
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCUBgXcKrT23ZkLlLEpqi44YBhycjZn9oY" />
+        <receiver
+            android:name="im.actor.molnia.PushReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+                <category android:name="im.actor.molnia" />
+            </intent-filter>
+        </receiver>
 
     </application>
 
