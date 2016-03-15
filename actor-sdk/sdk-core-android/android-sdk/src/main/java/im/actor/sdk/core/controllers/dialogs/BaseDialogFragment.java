@@ -60,8 +60,8 @@ public abstract class BaseDialogFragment extends DisplayListFragment<Dialog, Dia
 
         TextView hint = new TextView(getActivity());
         SpannableString spannableString = new SpannableString(getString(R.string.dialogs_hint));
-        spannableString.setSpan(new ForegroundColorSpan(Color.RED), 11, 12, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(new BaseUrlSpan("http://actor.im", false), 24, 29, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new ForegroundColorSpan(Color.RED), 10, 11, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new BaseUrlSpan("http://actor.im", false), 23, 28, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
         hint.setText(spannableString);
         hint.setOnClickListener(new View.OnClickListener() {
             @Override
