@@ -9,6 +9,7 @@ import android.support.v7.app.AlertDialog;
 import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -38,11 +39,16 @@ public class MainActivity extends BaseFragmentActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
 
+        if (savedInstanceState == null) {
+            showFragment(new DialogsFragment(), false, false);
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        final View dialogs = findViewById(R.id.content_frame);
+
         bind(messenger().getAppState().getIsAppLoaded(),
                 messenger().getAppState().getIsAppEmpty(),
                 new ValueDoubleChangedListener<Boolean, Boolean>() {
@@ -51,12 +57,14 @@ public class MainActivity extends BaseFragmentActivity {
                                           Boolean isAppEmpty, Value<Boolean> Value2) {
                         if (isAppEmpty) {
                             if (isAppLoaded) {
-                                //Sync
+                                dialogs.setVisibility(View.INVISIBLE);
                             } else {
-                                //no daata
+                                dialogs.setVisibility(View.INVISIBLE);
+
                             }
                         } else {
-                            showFragment(new DialogsFragment(), false, false);
+                            dialogs.setVisibility(View.VISIBLE);
+
                         }
                     }
                 });
