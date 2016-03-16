@@ -46,7 +46,7 @@ public abstract class BaseDialogFragment extends DisplayListFragment<Dialog, Dia
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         if (getArguments() != null) {
-            joinGroupUrl = getArguments().getString("invite_url", null);
+//            joinGroupUrl = getArguments().getString("invite_url", null);
         }
 
         View res = inflate(inflater, container, R.layout.fragment_dialogs,

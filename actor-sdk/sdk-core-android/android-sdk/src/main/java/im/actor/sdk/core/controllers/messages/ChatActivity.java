@@ -141,7 +141,7 @@ public class ChatActivity extends BaseActivity {
 
     protected void setFragment(Bundle savedInstanceState) {
         if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction()
+            getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, MessagesFragment.create(peer))
                     .commit();
         }

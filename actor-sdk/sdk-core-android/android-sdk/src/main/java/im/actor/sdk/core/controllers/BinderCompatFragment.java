@@ -1,6 +1,6 @@
 package im.actor.sdk.core.controllers;
 
-import android.app.Fragment;
+
 import android.view.View;
 import android.widget.TextView;
 
@@ -13,7 +13,7 @@ import im.actor.sdk.core.ActorBinder;
 /**
  * Created by ex3ndr on 17.09.14.
  */
-public class BinderCompatFragment extends Fragment {
+public class BinderCompatFragment extends android.support.v4.app.Fragment {
 
     private final ActorBinder BINDER = new ActorBinder();
 

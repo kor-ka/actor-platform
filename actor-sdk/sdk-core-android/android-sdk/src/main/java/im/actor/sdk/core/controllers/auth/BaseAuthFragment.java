@@ -1,5 +1,6 @@
 package im.actor.sdk.core.controllers.auth;
 
+import android.os.Build;
 import android.widget.EditText;
 
 import im.actor.core.AuthState;
@@ -16,11 +17,15 @@ public abstract class BaseAuthFragment extends BaseFragment {
     }
 
     protected void setTitle(int resId) {
-        ((BaseFragmentActivity) getActivity()).getActionBar().setTitle(resId);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            ((BaseFragmentActivity) getActivity()).getActionBar().setTitle(resId);
+        }
     }
 
     protected void setTitle(String title) {
-        ((BaseFragmentActivity) getActivity()).getActionBar().setTitle(title);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            ((BaseFragmentActivity) getActivity()).getActionBar().setTitle(title);
+        }
     }
 
     protected void executeAuth(Command<AuthState> command, String action) {

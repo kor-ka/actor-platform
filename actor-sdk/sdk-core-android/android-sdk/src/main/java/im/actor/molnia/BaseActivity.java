@@ -1,10 +1,13 @@
 package im.actor.molnia;
 
+import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toolbar;
@@ -23,7 +26,7 @@ import im.actor.sdk.core.ActorBinder;
 
 import static im.actor.sdk.util.ActorSDKMessenger.messenger;
 
-public class BaseActivity extends Activity {
+public class BaseActivity extends FragmentActivity {
     private final ActorBinder BINDER = new ActorBinder();
 
     private boolean isResumed = false;
@@ -114,38 +117,7 @@ public class BaseActivity extends Activity {
         notifyOnPause();
     }
 
-    protected void setToolbar(int text, boolean enableBack) {
-        getActionBar().setDisplayShowCustomEnabled(false);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        if (enableBack) {
-            getActionBar().setDisplayShowHomeEnabled(true);
-        }
-        getActionBar().setDisplayShowTitleEnabled(true);
-        getActionBar().setDisplayUseLogoEnabled(false);
-        getActionBar().setTitle(text);
-    }
 
-    protected void setToolbar(int text) {
-        setToolbar(text, true);
-    }
-
-    protected void setToolbar(View view, ActionBar.LayoutParams params, boolean enableBack) {
-        getActionBar().setDisplayShowCustomEnabled(true);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setDisplayShowTitleEnabled(false);
-        getActionBar().setDisplayUseLogoEnabled(false);
-        getActionBar().setCustomView(view, params);
-        if (enableBack) {
-            getActionBar().setDisplayShowHomeEnabled(true);
-        } else {
-            getActionBar().setDisplayShowHomeEnabled(false);
-            getActionBar().setDisplayHomeAsUpEnabled(false);
-        }
-    }
-
-    protected void setToolbar(View view, ActionBar.LayoutParams params) {
-        setToolbar(view, params, true);
-    }
 
     private void notifyOnResume() {
         if (isResumed) {
