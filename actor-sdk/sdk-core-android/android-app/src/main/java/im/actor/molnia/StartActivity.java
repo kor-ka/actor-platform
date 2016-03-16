@@ -1,12 +1,12 @@
 package im.actor.molnia;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
 import android.os.Bundle;
 
 import im.actor.sdk.ActorSDK;
 
 
-public class StartActivity extends AppCompatActivity {
+public class StartActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

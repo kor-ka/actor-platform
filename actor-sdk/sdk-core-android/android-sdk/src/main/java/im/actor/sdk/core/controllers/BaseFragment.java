@@ -1,8 +1,8 @@
 package im.actor.sdk.core.controllers;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatDialog;
 import android.view.View;
 
 import im.actor.core.viewmodel.Command;
@@ -115,9 +115,10 @@ public class BaseFragment extends BinderCompatFragment {
 
     public <T> void execute(Command<T> cmd, int title) {
 
-        final AppCompatDialog dialog = new AppCompatDialog(getActivity());
-        dialog.setTitle(title);
-        dialog.setCancelable(false);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle(title);
+        builder.setCancelable(false);
+        final AlertDialog dialog = builder.create();
         dialog.show();
 
         cmd.start(new CommandCallback<T>() {

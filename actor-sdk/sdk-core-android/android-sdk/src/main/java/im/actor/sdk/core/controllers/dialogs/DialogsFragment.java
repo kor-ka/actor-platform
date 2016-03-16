@@ -1,7 +1,7 @@
 package im.actor.sdk.core.controllers.dialogs;
 
+import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
 import im.actor.core.entity.Dialog;

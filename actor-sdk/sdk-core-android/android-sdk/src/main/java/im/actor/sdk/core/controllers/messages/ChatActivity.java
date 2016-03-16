@@ -32,10 +32,10 @@ public class ChatActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat);
 
-        assert getSupportActionBar() != null;
-        getSupportActionBar().setDisplayShowHomeEnabled(false);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        assert getActionBar() != null;
+        getActionBar().setDisplayShowHomeEnabled(false);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setDisplayShowTitleEnabled(true);
 
         intent = getIntent();
         handleIntenet(savedInstanceState);
@@ -92,7 +92,7 @@ public class ChatActivity extends BaseActivity {
             if (user == null) {
                 finish();
             }
-            getSupportActionBar().setTitle(user.getName().get());
+            getActionBar().setTitle(user.getName().get());
         } else if (peer.getPeerType() == PeerType.GROUP) {
             // Loading group
             GroupVM group = groups().get(peer.getPeerId());
@@ -100,7 +100,7 @@ public class ChatActivity extends BaseActivity {
                 finish();
             }
 
-            getSupportActionBar().setTitle(group.getName().get());
+            getActionBar().setTitle(group.getName().get());
 
         }
 
@@ -141,7 +141,7 @@ public class ChatActivity extends BaseActivity {
 
     protected void setFragment(Bundle savedInstanceState) {
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
+            getFragmentManager().beginTransaction()
                     .replace(R.id.container, MessagesFragment.create(peer))
                     .commit();
         }

@@ -16,6 +16,7 @@
         android:duplicateParentState="true">
 
         <TextView
+            android:textColor="@android:color/black"
             android:id="@+id/tv_text"
             android:paddingLeft="11dp"
             android:paddingRight="11dp"

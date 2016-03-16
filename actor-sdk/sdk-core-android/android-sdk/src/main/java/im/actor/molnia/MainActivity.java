@@ -1,11 +1,11 @@
 package im.actor.molnia;
 
 
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,10 +34,10 @@ public class MainActivity extends BaseFragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        assert getSupportActionBar() != null;
-        getSupportActionBar().setDisplayShowHomeEnabled(false);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        assert getActionBar() != null;
+        getActionBar().setDisplayShowHomeEnabled(false);
+        getActionBar().setDisplayHomeAsUpEnabled(false);
+        getActionBar().setDisplayShowTitleEnabled(true);
 
         if (savedInstanceState == null) {
             showFragment(new DialogsFragment(), false, false);
@@ -100,7 +100,7 @@ public class MainActivity extends BaseFragmentActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.add) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogStyle);
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
             String title = "Find contact";
             builder.setTitle(title);
 

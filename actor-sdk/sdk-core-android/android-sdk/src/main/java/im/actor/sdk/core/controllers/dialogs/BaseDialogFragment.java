@@ -59,6 +59,7 @@ public abstract class BaseDialogFragment extends DisplayListFragment<Dialog, Dia
         footer.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Screen.dp(100)));
 
         TextView hint = new TextView(getActivity());
+        hint.setTextColor(Color.DKGRAY);
         SpannableString spannableString = new SpannableString(getString(R.string.dialogs_hint));
         spannableString.setSpan(new ForegroundColorSpan(Color.RED), 10, 11, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
         spannableString.setSpan(new BaseUrlSpan("http://actor.im", false), 23, 28, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);

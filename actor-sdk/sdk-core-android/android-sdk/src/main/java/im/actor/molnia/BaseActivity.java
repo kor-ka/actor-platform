@@ -1,13 +1,13 @@
 package im.actor.molnia;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import im.actor.core.entity.Avatar;
 import im.actor.core.viewmodel.Command;
@@ -23,7 +23,7 @@ import im.actor.sdk.core.ActorBinder;
 
 import static im.actor.sdk.util.ActorSDKMessenger.messenger;
 
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends Activity {
     private final ActorBinder BINDER = new ActorBinder();
 
     private boolean isResumed = false;
@@ -115,14 +115,14 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     protected void setToolbar(int text, boolean enableBack) {
-        getSupportActionBar().setDisplayShowCustomEnabled(false);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setDisplayShowCustomEnabled(false);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
         if (enableBack) {
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getActionBar().setDisplayShowHomeEnabled(true);
         }
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
-        getSupportActionBar().setDisplayUseLogoEnabled(false);
-        getSupportActionBar().setTitle(text);
+        getActionBar().setDisplayShowTitleEnabled(true);
+        getActionBar().setDisplayUseLogoEnabled(false);
+        getActionBar().setTitle(text);
     }
 
     protected void setToolbar(int text) {
@@ -130,18 +130,16 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     protected void setToolbar(View view, ActionBar.LayoutParams params, boolean enableBack) {
-        getSupportActionBar().setDisplayShowCustomEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setDisplayUseLogoEnabled(false);
-        getSupportActionBar().setCustomView(view, params);
+        getActionBar().setDisplayShowCustomEnabled(true);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setDisplayShowTitleEnabled(false);
+        getActionBar().setDisplayUseLogoEnabled(false);
+        getActionBar().setCustomView(view, params);
         if (enableBack) {
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getActionBar().setDisplayShowHomeEnabled(true);
         } else {
-            getSupportActionBar().setDisplayShowHomeEnabled(false);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-            Toolbar parent = (Toolbar) view.getParent();
-            parent.setContentInsetsAbsolute(0, 0);
+            getActionBar().setDisplayShowHomeEnabled(false);
+            getActionBar().setDisplayHomeAsUpEnabled(false);
         }
     }
 

@@ -16,11 +16,11 @@ public abstract class BaseAuthFragment extends BaseFragment {
     }
 
     protected void setTitle(int resId) {
-        ((BaseFragmentActivity) getActivity()).getSupportActionBar().setTitle(resId);
+        ((BaseFragmentActivity) getActivity()).getActionBar().setTitle(resId);
     }
 
     protected void setTitle(String title) {
-        ((BaseFragmentActivity) getActivity()).getSupportActionBar().setTitle(title);
+        ((BaseFragmentActivity) getActivity()).getActionBar().setTitle(title);
     }
 
     protected void executeAuth(Command<AuthState> command, String action) {

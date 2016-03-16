@@ -123,6 +123,7 @@ public class DialogHolder extends BindedViewHolder {
 
         text = new TextView(context);
         text.setTextSize(15);
+        text.setTextColor(Color.DKGRAY);
         text.setPadding(0, Screen.dp(5), Screen.dp(28), 0);
         text.setSingleLine();
         text.setEllipsize(TextUtils.TruncateAt.END);

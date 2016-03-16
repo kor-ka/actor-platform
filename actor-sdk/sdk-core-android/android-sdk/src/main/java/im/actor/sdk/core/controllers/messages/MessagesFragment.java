@@ -2,7 +2,6 @@ package im.actor.sdk.core.controllers.messages;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,9 +12,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.ActionMode;
 import android.support.v7.widget.ChatLinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -73,7 +69,6 @@ public class MessagesFragment extends DisplayListFragment<Message, MessageHolder
     private ChatLinearLayoutManager linearLayoutManager;
     protected MessagesAdapter messagesAdapter;
     // private ConversationVM conversationVM;
-    private ActionMode actionMode;
     private int onPauseSize = 0;
 
     public MessagesFragment(Peer peer) {
