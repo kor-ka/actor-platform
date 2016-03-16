@@ -18,13 +18,13 @@ public abstract class BaseAuthFragment extends BaseFragment {
 
     protected void setTitle(int resId) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            ((BaseFragmentActivity) getActivity()).getActionBar().setTitle(resId);
+            ((BaseFragmentActivity) getActivity()).getSupportActionBar().setTitle(resId);
         }
     }
 
     protected void setTitle(String title) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            ((BaseFragmentActivity) getActivity()).getActionBar().setTitle(title);
+            ((BaseFragmentActivity) getActivity()).getSupportActionBar().setTitle(title);
         }
     }
 

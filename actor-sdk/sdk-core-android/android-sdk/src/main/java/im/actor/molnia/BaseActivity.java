@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toolbar;
@@ -26,7 +27,7 @@ import im.actor.sdk.core.ActorBinder;
 
 import static im.actor.sdk.util.ActorSDKMessenger.messenger;
 
-public class BaseActivity extends FragmentActivity {
+public class BaseActivity extends AppCompatActivity {
     private final ActorBinder BINDER = new ActorBinder();
 
     private boolean isResumed = false;
