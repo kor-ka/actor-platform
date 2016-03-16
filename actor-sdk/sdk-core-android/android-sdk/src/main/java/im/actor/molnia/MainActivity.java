@@ -108,7 +108,7 @@ public class MainActivity extends BaseFragmentActivity {
             ll.setPadding(Screen.dp(20), 0, Screen.dp(20), 0);
 
             final EditText input = new EditText(this);
-
+            input.setHint("email/phone/nick");
 //            input.setTextColor(Color.BLACK);
             ll.addView(input, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             builder.setView(ll);
