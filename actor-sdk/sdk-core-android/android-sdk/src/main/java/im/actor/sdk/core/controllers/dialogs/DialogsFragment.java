@@ -1,13 +1,21 @@
 package im.actor.sdk.core.controllers.dialogs;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
 import android.widget.Toast;
+
+import net.dinglisch.android.tasker.FireReceiver;
+import net.dinglisch.android.tasker.PluginBundleManager;
+import net.dinglisch.android.tasker.TaskerPlugin;
 
 import im.actor.core.entity.Dialog;
 import im.actor.core.entity.PeerType;
 import im.actor.core.viewmodel.GroupVM;
 import im.actor.molnia.MainActivity;
+import im.actor.molnia.TaskerSettingActivity;
 import im.actor.sdk.ActorSDK;
 import im.actor.sdk.R;
 
@@ -17,7 +25,27 @@ import static im.actor.sdk.util.ActorSDKMessenger.messenger;
 public class DialogsFragment extends BaseDialogFragment {
 
     protected void onItemClick(Dialog item) {
-        ((MainActivity) getActivity()).onDialogClicked(item);
+        if (TaskerSettingActivity.inTaskerMode) {
+
+            Intent intent = new Intent();
+            final Bundle resultBundle =
+                    PluginBundleManager.generateBundle(getActivity().getApplicationContext(), item.getPeer().getUnuqueId());
+
+            TaskerPlugin.Setting.setVariableReplaceKeys(resultBundle, new String[]{FireReceiver.KEY_TEXT});
+
+            if (TaskerPlugin.Setting.hostSupportsOnFireVariableReplacement(getActivity())) {
+                TaskerPlugin.Setting.setVariableReplaceKeys(resultBundle, new String[]{FireReceiver.KEY_TEXT});
+            }
+
+            intent.putExtra(com.twofortyfouram.locale.Intent.EXTRA_BUNDLE, resultBundle);
+            intent.putExtra(com.twofortyfouram.locale.Intent.EXTRA_STRING_BLURB, item.getDialogTitle());
+
+            getActivity().setResult(Activity.RESULT_OK, intent);
+            TaskerSettingActivity.inTaskerMode = false;
+            getActivity().finish();
+        } else {
+            ((MainActivity) getActivity()).onDialogClicked(item);
+        }
     }
 
     protected boolean onItemLongClick(final Dialog dialog) {

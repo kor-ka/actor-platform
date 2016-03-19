@@ -139,8 +139,16 @@ public class ActorSDK {
     }
 
     public void startMessagingApp(Activity context) {
+        startMessagingApp(context, false);
+    }
+
+    public void startMessagingApp(Activity context, boolean taskerMode) {
         if (messenger.isLoggedIn()) {
-            context.startActivity(new Intent(context, MainActivity.class));
+            if (!taskerMode) {
+                context.startActivity(new Intent(context, MainActivity.class));
+            } else {
+                context.startActivityForResult(new Intent(context, MainActivity.class), 1);
+            }
         } else {
             context.startActivity(new Intent(context, AuthActivity.class));
 
